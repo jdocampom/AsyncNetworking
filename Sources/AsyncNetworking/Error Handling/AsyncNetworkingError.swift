@@ -10,6 +10,9 @@ import Foundation
 /// Represents different types of errors that can occur when using a `AsyncNetworkManager` object to make HTTP network requests.
 public enum AsyncNetworkingError: Error, LocalizedError {
     
+    /// Indicates that the provided HTTP method is not valid for the current API request.
+    case invalidHTTPMethod
+    
     /// Indicates that the endpoint URL provided to the network manager is invalid.
     case invalidURL
     
@@ -34,12 +37,17 @@ public enum AsyncNetworkingError: Error, LocalizedError {
     /// Indicates that the data received from the API appears to be corrupt.
     case corruptData
     
+    /// Indicates that an error occurred during the encoding of data sent to the API. The error is passed as an argument to this case.
+    case encodingError(error: Error)
+    
     /// Indicates that an error occurred during the decoding of data received from the API. The error is passed as an argument to this case.
     case decodingError(error: Error)
     
     /// A `String` value that provides a localized description of the error.
     public var errorDescription: String? {
         switch self {
+        case .invalidHTTPMethod:
+            return "The provided HTTP method is invalid for this request type."
         case .invalidURL:
             return "The endpoint URL is invalid."
         case .invalidResponseStatus:
@@ -56,6 +64,8 @@ public enum AsyncNetworkingError: Error, LocalizedError {
             return "The data provided appears to be corrupt."
         case .invalidResponse:
             return "Invalid response."
+        case .encodingError(let error):
+            return "Encoding error: \(error.localizedDescription)."
         case .decodingError(let error):
             return "Decoding error: \(error.localizedDescription)."
         }
