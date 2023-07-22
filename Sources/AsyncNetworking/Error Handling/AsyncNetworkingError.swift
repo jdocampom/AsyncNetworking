@@ -8,7 +8,7 @@
 import Foundation
 
 /// Represents different types of errors that can occur when using a `AsyncNetworkManager` object to make HTTP network requests.
-enum AsyncNetworkingError: Error, LocalizedError {
+public enum AsyncNetworkingError: Error, LocalizedError {
     
     /// Indicates that the endpoint URL provided to the network manager is invalid.
     case invalidURL
@@ -38,7 +38,7 @@ enum AsyncNetworkingError: Error, LocalizedError {
     case decodingError(error: Error)
     
     /// A `String` value that provides a localized description of the error.
-    var errorDescription: String? {
+    public var errorDescription: String? {
         switch self {
         case .invalidURL:
             return "The endpoint URL is invalid."
@@ -62,12 +62,12 @@ enum AsyncNetworkingError: Error, LocalizedError {
     }
     
     /// An optional `String` value that provides a localized message describing the reason for the failure.
-    var failureReason: String? {
+    public var failureReason: String? {
         return nil
     }
     
     /// An optional `String` value that provides a localized message describing how one may recover from the failure.
-    var recoverySuggestion: String? {
+    public var recoverySuggestion: String? {
         return nil
     }
     

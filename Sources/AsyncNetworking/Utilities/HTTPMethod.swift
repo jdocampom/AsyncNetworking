@@ -8,7 +8,7 @@
 import Foundation
 
 /// Represents the  HTTP methods used in RESTful web services that are supported by the `AsyncNetworking` framework.
-@objc enum HTTPMethod: Int, CaseIterable {
+@objc public enum HTTPMethod: Int, CaseIterable {
     
     /// Represents the `GET` HTTP method.
     case get

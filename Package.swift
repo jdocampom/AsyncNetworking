@@ -1,4 +1,4 @@
-// swift-tools-version: 5.9
+// swift-tools-version: 5.8
 // The swift-tools-version declares the minimum version of Swift required to build this package.
 
 //
@@ -18,8 +18,7 @@ private let supportedPlatforms: [SupportedPlatform] = [
     .iOS(.v15),
     .macOS(.v12),
     .watchOS(.v8),
-    .tvOS(.v15),
-    .visionOS(.v1)
+    .tvOS(.v15)
 ]
 
 /// An array of `Product` objects which defines the products produced by the `AsyncNetworking` package, which are the executables or libraries exposed to other packages that depend on yours.
