@@ -48,3 +48,20 @@ import Foundation
     }
     
 }
+
+// MARK: - Static Properties and Methods
+
+extension AppEnvironment {
+    
+    /// A demo `AppEnvironment` value used for testing purposes.
+    public static let testing = AppEnvironment(
+        named: "ReqRes",
+        usingHost: "reqres.in",
+        andSession: {
+            let configuration = URLSessionConfiguration.ephemeral
+            configuration.requestCachePolicy = .reloadIgnoringLocalAndRemoteCacheData
+            return URLSession(configuration: configuration)
+        }()
+    )
+    
+}
