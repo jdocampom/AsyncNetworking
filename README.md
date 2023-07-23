@@ -3,9 +3,7 @@
 > `AsyncNetworkKit` is a Swift framework that provides a powerful and easy-to-use networking abstraction for making asynchronous network requests with async/await support. It simplifies the process of fetching data from RESTful APIs and handling responses using modern Swift features.
 
 [![Swift 5.8][swift-image]][swift-url]
-[![Build Status][travis-image]][travis-url]
 [![License][license-image]][license-url]
-[![codebeat-badge][codebeat-image]][codebeat-url]
 
 The framework comes with the following features:
 
@@ -145,6 +143,8 @@ endpoint.decoder.dataDecodingStrategy = .base64
     * Added methods to check if the response code for a request is valid without expecting a response from the server.
     * Added test case for the DELETE HTTP method type.
 * 1.5
+    * Updated README.
+* 1.6
     * Work in progress.
 
 ## License
@@ -163,11 +163,7 @@ This framework was inspired by the need for a modern and easy to use networking 
 
 If you have any questions or suggestions, feel free to contact me at gummy_pond0v@icloud.com or at my Twitter account [@jdocampom_0117](https://twitter.com/jdocampom_0117).
 
-[swift-image]:https://img.shields.io/badge/swift-3.0-orange.svg
+[swift-image]:https://img.shields.io/badge/swift-5.8-orange.svg
 [swift-url]: https://swift.org/
 [license-image]: https://img.shields.io/badge/License-MIT-blue.svg
 [license-url]: LICENSE
-[travis-image]: https://img.shields.io/travis/dbader/node-datadog-metrics/master.svg
-[travis-url]: https://travis-ci.org/dbader/node-datadog-metrics
-[codebeat-image]: https://codebeat.co/badges/c19b47ea-2f9d-45df-8458-b2d952fe9dad
-[codebeat-url]: https://codebeat.co/projects/github-com-vsouza-awesomeios-com
