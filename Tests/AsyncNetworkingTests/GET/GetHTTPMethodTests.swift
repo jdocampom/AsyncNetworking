@@ -24,7 +24,7 @@ import XCTest
 /// **Example:**
 ///
 /// ```swift
-/// class MyGetHTTPMethodTests: GetHTTPMethodTests {
+/// class MyGetHTTPMethodTests: AsyncNetworkManagerTestCase {
 ///
 ///     // Test method for the GET HTTP method with a specific endpoint.
 ///     func testGetSingleUser() async throws {
@@ -62,7 +62,7 @@ final class GetHTTPMethodTests: AsyncNetworkManagerTestCase {
     /// - Important: The `User` struct includes a nested `Data` struct that maps the properties of the user data returned by the server. The `User` struct also contains a nested `Support` struct to map additional support information returned by the server.
     ///
     /// - Note: The test also includes a `catch` block to handle any errors that may occur during the network request. If an error occurs, the test prints its localized description and fails.
-    func testSingleUserFound() async throws {
+    private func testSingleUserFound() async throws {
         let endpoint = Endpoint(
             type: User.self,
             path: "/api/users/2",
@@ -93,7 +93,7 @@ final class GetHTTPMethodTests: AsyncNetworkManagerTestCase {
     /// - Important: The `User` struct includes a nested `Data` struct that maps the properties of the user data returned by the server. The `User` struct also contains a nested `Support` struct to map additional support information returned by the server.
     ///
     /// - Note: The test method expects the server to return an error when the user with ID 23 is not found. Thus, the test is considered successful if the request fails with the expected error.
-    func testSingleUserNotFound() async throws {
+    private func testSingleUserNotFound() async throws {
         let endpoint = Endpoint(
             type: User.self,
             path: "/api/users/23",
@@ -132,7 +132,7 @@ final class GetHTTPMethodTests: AsyncNetworkManagerTestCase {
     /// - Important: The `UserList` struct includes a nested `Data` struct that maps the properties of each user in the list. The `UserList` struct also contains a nested `Support` struct to map additional support information returned by the server.
     ///
     /// - Note: The test method expects the server to return the correct list of users with the specified properties. Thus, the test is considered successful if the response data meets the expected criteria.
-    func testUserListFound() async throws {
+    private func testUserListFound() async throws {
         let endpoint = Endpoint(
             type: UserList.self,
             path: "/api/users?page=2",
@@ -168,7 +168,7 @@ final class GetHTTPMethodTests: AsyncNetworkManagerTestCase {
     /// - Important: The test method is designed to handle the server's delayed response, and the assertions should still pass after the delay. If the assertions fail, it may indicate issues with the server response or the delay mechanism.
     ///
     /// - Note: The test method uses the same `UserList` struct with nested `Data` and `Support` structs, similar to `testUserListFound()`.
-    func testUserListFoundWithDelay() async throws {
+    private func testUserListFoundWithDelay() async throws {
         let endpoint = Endpoint(
             type: UserList.self,
             path: "/api/users?delay=3",
@@ -202,7 +202,7 @@ final class GetHTTPMethodTests: AsyncNetworkManagerTestCase {
     /// - Important: This test method is automatically executed by the testing framework when running the tests. Any failed assertions will be reported as test failures.
     ///
     /// - Note: The test method uses the `Resource` struct with nested `Data` and `Support` structs to represent the resource data returned by the server.
-    func testSingleResourceFound() async throws {
+    private func testSingleResourceFound() async throws {
         let endpoint = Endpoint(
             type: Resource.self,
             path: "/api/unknown/2",
@@ -236,7 +236,7 @@ final class GetHTTPMethodTests: AsyncNetworkManagerTestCase {
     /// - Important: This test method is automatically executed by the testing framework when running the tests. It verifies that the `AsyncNetworkManager` correctly handles the scenario of fetching a non-existent resource using the `GET` HTTP method.
     ///
     /// - Note: The test method uses the `Resource` struct with nested `Data` and `Support` structs to represent the resource data returned by the server.
-    func testSingleResourceNotFound() async throws {
+    private func testSingleResourceNotFound() async throws {
         let endpoint = Endpoint(
             type: Resource.self,
             path: "/api/unknown/23",
@@ -268,7 +268,7 @@ final class GetHTTPMethodTests: AsyncNetworkManagerTestCase {
     /// - Important: This test method is automatically executed by the testing framework when running the tests. It verifies that the `AsyncNetworkManager` correctly handles the scenario of fetching a list of resources using the `GET` HTTP method.
     ///
     /// - Note: The test method uses the `ResourceList` struct with nested `Data` and `Support` structs to represent the list of resources returned by the server.
-    func testResourceListFound() async throws {
+    private func testResourceListFound() async throws {
         let endpoint = Endpoint(
             type: ResourceList.self,
             path: "/api/unknown",

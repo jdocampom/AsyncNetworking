@@ -12,7 +12,7 @@ import Foundation
 /// Each data model conforms to the `Codable` protocol, enabling easy encoding and decoding of JSON data.
 ///
 ///
-/// - Note: These data models are specific to the test cases in the `PostHTTPMethodTests` class and are used to simulate responses from the server. They serve the purpose of validating the `AsyncNetworkManager`'s handling of data decoding for `POST` HTTP requests.
+/// - Note: These data models are specific to the test cases in the `PostHTTPMethodTests` class and are used to simulate responses from the server. They serve the purpose of validating the `AsyncNetworkManager`'s handling of data encoding and decoding for `POST` HTTP requests.
 
 extension PostHTTPMethodTests {
     

@@ -24,7 +24,7 @@ import XCTest
 /// **Example:**
 ///
 /// ```swift
-/// class MyPostHTTPMethodTests: GetHTTPMethodTests {
+/// class MyPostHTTPMethodTests: AsyncNetworkManagerTestCase {
 ///
 ///     // Test method for the POST HTTP method with a specific endpoint.
 ///     func testCreateUser() async throws {
@@ -63,7 +63,7 @@ final class PostHTTPMethodTests: AsyncNetworkManagerTestCase {
     /// - Important: The decoding strategy for the response is also configured within this method. The `UserProfileResponse` struct is used as the `decodeType` to ensure that the server's response is correctly mapped to this structure during the decoding process. The `UserProfileResponse` struct contains information about the newly created user, such as the user's name, ID, job, and creation date.
     ///
     /// - Note: The decoding strategies for the keys, dates, and data are also set to `.useDefaultKeys`, `.iso8601`, and `.base64`, respectively. These decoding strategies ensure that the server's response is accurately mapped to the corresponding properties within the `UserProfileResponse` struct.
-    func testCreateUser() async throws {
+    private func testCreateUser() async throws {
         let httpBody = UserProfileBody(name: "morpheus", job: "leader")
         let endpoint = Endpoint(
             decodeType: UserProfileResponse.self,
@@ -72,6 +72,9 @@ final class PostHTTPMethodTests: AsyncNetworkManagerTestCase {
             headers: [:],
             httpData: httpBody
         )
+        endpoint.encoder.keyEncodingStrategy = .useDefaultKeys
+        endpoint.encoder.dateEncodingStrategy = .iso8601
+        endpoint.encoder.dataEncodingStrategy = .base64
         endpoint.decoder.keyDecodingStrategy = .useDefaultKeys
         endpoint.decoder.dateDecodingStrategy = .iso8601
         endpoint.decoder.dataDecodingStrategy = .base64
@@ -97,7 +100,7 @@ final class PostHTTPMethodTests: AsyncNetworkManagerTestCase {
     /// - Important: The decoding strategy for the response is also configured within this method. The `UserRegistrationSuccessResponse` struct is used as the `decodeType` to ensure that the server's response is correctly mapped to this structure during the decoding process. The `UserRegistrationSuccessResponse` struct contains the user's ID and registration token upon successful registration.
     ///
     /// - Note: The decoding strategies for the keys, dates, and data are set to `.useDefaultKeys`, `.iso8601`, and `.base64`, respectively. These decoding strategies ensure that the server's response is accurately mapped to the corresponding properties within the `UserRegistrationSuccessResponse` struct.
-    func testSuccessfulUserRegistration() async throws {
+    private func testSuccessfulUserRegistration() async throws {
         let httpBody = UserRegistrationSuccessBody(email: "eve.holt@reqres.in", password: "pistol")
         let endpoint = Endpoint(
             decodeType: UserRegistrationSuccessResponse.self,
@@ -106,6 +109,9 @@ final class PostHTTPMethodTests: AsyncNetworkManagerTestCase {
             headers: [:],
             httpData: httpBody
         )
+        endpoint.encoder.keyEncodingStrategy = .useDefaultKeys
+        endpoint.encoder.dateEncodingStrategy = .iso8601
+        endpoint.encoder.dataEncodingStrategy = .base64
         endpoint.decoder.keyDecodingStrategy = .useDefaultKeys
         endpoint.decoder.dateDecodingStrategy = .iso8601
         endpoint.decoder.dataDecodingStrategy = .base64
@@ -131,7 +137,7 @@ final class PostHTTPMethodTests: AsyncNetworkManagerTestCase {
     /// - Important: The decoding strategy for the response is also configured within this method. The `UserRegistrationFailedResponse` struct is used as the `decodeType` to ensure that the server's error response is correctly mapped to this structure during the decoding process. The `UserRegistrationFailedResponse` struct contains the error message returned by the server upon a failed registration attempt.
     ///
     /// - Note: The decoding strategies for the keys, dates, and data are set to `.useDefaultKeys`, `.iso8601`, and `.base64`, respectively. These decoding strategies ensure that the server's error response is accurately mapped to the corresponding properties within the `UserRegistrationFailedResponse` struct.
-    func testFailedUserRegistration() async throws {
+    private func testFailedUserRegistration() async throws {
         let httpBody = UserRegistrationFailedBody(email: "sydney@fife")
         let endpoint = Endpoint(
             decodeType: UserRegistrationFailedResponse.self,
@@ -140,6 +146,9 @@ final class PostHTTPMethodTests: AsyncNetworkManagerTestCase {
             headers: [:],
             httpData: httpBody
         )
+        endpoint.encoder.keyEncodingStrategy = .useDefaultKeys
+        endpoint.encoder.dateEncodingStrategy = .iso8601
+        endpoint.encoder.dataEncodingStrategy = .base64
         endpoint.decoder.keyDecodingStrategy = .useDefaultKeys
         endpoint.decoder.dateDecodingStrategy = .iso8601
         endpoint.decoder.dataDecodingStrategy = .base64
@@ -163,7 +172,7 @@ final class PostHTTPMethodTests: AsyncNetworkManagerTestCase {
     /// - Important: The decoding strategy for the response is also configured within this method. The `LoginSuccessResponse` struct is used as the `decodeType` to ensure that the server's response is correctly mapped to this structure during the decoding process. The `LoginSuccessResponse` struct contains the user's authentication token returned by the server upon successful login.
     ///
     /// - Note: The decoding strategies for the keys, dates, and data are set to `.useDefaultKeys`, `.iso8601`, and `.base64`, respectively. These decoding strategies ensure that the server's response is accurately mapped to the corresponding properties within the `LoginSuccessResponse` struct.
-    func testSuccessfulLogin() async throws {
+    private func testSuccessfulLogin() async throws {
         let httpBody = LoginSuccessBody(email: "eve.holt@reqres.in", password: "cityslicka")
         let endpoint = Endpoint(
             decodeType: LoginSuccessResponse.self,
@@ -172,6 +181,9 @@ final class PostHTTPMethodTests: AsyncNetworkManagerTestCase {
             headers: [:],
             httpData: httpBody
         )
+        endpoint.encoder.keyEncodingStrategy = .useDefaultKeys
+        endpoint.encoder.dateEncodingStrategy = .iso8601
+        endpoint.encoder.dataEncodingStrategy = .base64
         endpoint.decoder.keyDecodingStrategy = .useDefaultKeys
         endpoint.decoder.dateDecodingStrategy = .iso8601
         endpoint.decoder.dataDecodingStrategy = .base64
@@ -196,7 +208,7 @@ final class PostHTTPMethodTests: AsyncNetworkManagerTestCase {
     /// - Important: The decoding strategy for the response is also configured within this method. The `LoginFailedResponse` struct is used as the `decodeType` to ensure that the server's response is correctly mapped to this structure during the decoding process. The `LoginFailedResponse` struct contains an error message returned by the server indicating the login failure.
     ///
     /// - Note: The decoding strategies for the keys, dates, and data are set to `.useDefaultKeys`, `.iso8601`, and `.base64`, respectively. These decoding strategies ensure that the server's response is accurately mapped to the corresponding properties within the `LoginFailedResponse` struct.
-    func testFailedLogin() async throws {
+    private func testFailedLogin() async throws {
         let httpBody = LoginFailedBody(email: "peter@klaven")
         let endpoint = Endpoint(
             decodeType: LoginFailedResponse.self,
@@ -205,6 +217,9 @@ final class PostHTTPMethodTests: AsyncNetworkManagerTestCase {
             headers: [:],
             httpData: httpBody
         )
+        endpoint.encoder.keyEncodingStrategy = .useDefaultKeys
+        endpoint.encoder.dateEncodingStrategy = .iso8601
+        endpoint.encoder.dataEncodingStrategy = .base64
         endpoint.decoder.keyDecodingStrategy = .useDefaultKeys
         endpoint.decoder.dateDecodingStrategy = .iso8601
         endpoint.decoder.dataDecodingStrategy = .base64
