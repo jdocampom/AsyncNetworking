@@ -11,25 +11,6 @@ import Foundation
 /// The models represent the structure of the data returned from the `REQRES.io` server for specific endpoints.
 /// Each data model conforms to the `Codable` protocol, enabling easy encoding and decoding of JSON data.
 ///
-/// `User` Data Model:
-///     - Represents a single user entity received from the server.
-///     - Contains user information such as ID, email, first name, last name, and avatar URL.
-///     - Utilizes custom coding keys to map the property names to the corresponding keys in the JSON response.
-///
-/// `UserList` Data Model:
-///     - Represents a list of users received from the server.
-///     - Contains information about the current page, the number of users per page, total user count, total number of pages, an array of user data, and support information.
-///     - Utilizes custom coding keys to map the property names to the corresponding keys in the JSON response.
-///
-/// `Resource` Data Model:
-///     - Represents a single user resource received from the server.
-///     - Contains user information such as ID, name, year, color, and pantone value.
-///     - Utilizes custom coding keys to map the property names to the corresponding keys in the JSON response.
-///
-/// `ResourceList` Data Model:
-///     - Represents a list of resources received from the server.
-///     - Contains information about the current page, the number of resources per page, total resource count, total number of pages, an array of resource data, and support information.
-///     - Utilizes custom coding keys to map the property names to the corresponding keys in the JSON response.
 ///
 /// - Note: These data models are specific to the test cases in the `GetHTTPMethodTests` class and are used to simulate responses from the server. They serve the purpose of validating the `AsyncNetworkManager`'s handling of data decoding for `GET` HTTP requests.
 
