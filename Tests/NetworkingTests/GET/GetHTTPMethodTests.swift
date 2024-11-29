@@ -1,25 +1,25 @@
 //
 //  GetHTTPMethodTests.swift
-//  AsyncNetworking
+//  Networking
 //
-//  Created by Juan Diego Ocampo on 2023-07-22.
+//  Created by Juan Diego Ocampo on 11.28.2024.
 //
 
 import Foundation
 import XCTest
 @testable import AsyncNetworking
 
-/// A test case class for testing the `GET` HTTP method using the `AsyncNetworkManager`.
+/// A test case class for testing the `GET` HTTP method using the `NetworkManager`.
 ///
-/// This test case class is a subclass of `AsyncNetworkManagerTestCase`, which provides the testing environment and instance of the `AsyncNetworkManager` with the `.testing` environment configuration. The `GetHTTPMethodTests` class focuses on testing the `GET` HTTP method for specific endpoints using the `AsyncNetworkManager`.
+/// This test case class is a subclass of `AsyncNetworkManagerTestCase`, which provides the testing environment and instance of the `NetworkManager` with the `.testing` environment configuration. The `GetHTTPMethodTests` class focuses on testing the `GET` HTTP method for specific endpoints using the `NetworkManager`.
 ///
 /// **Testing the GET HTTP Method:**
 ///
-/// The `GET` HTTP method is used to retrieve data from the server without modifying any resources. In this test case class, we define test methods to ensure that the `AsyncNetworkManager` correctly handles `GET` requests, performs the network communication, and decodes the server response into the expected model objects.
+/// The `GET` HTTP method is used to retrieve data from the server without modifying any resources. In this test case class, we define test methods to ensure that the `NetworkManager` correctly handles `GET` requests, performs the network communication, and decodes the server response into the expected model objects.
 ///
 /// **Usage:**
 ///
-/// To use this test case class, run the individual test methods or all test methods collectively to verify the correctness of the `GET` HTTP method implementation in the `AsyncNetworkManager`. The test methods are automatically executed by the testing framework, and any failed assertions will be reported as test failures.
+/// To use this test case class, run the individual test methods or all test methods collectively to verify the correctness of the `GET` HTTP method implementation in the `NetworkManager`. The test methods are automatically executed by the testing framework, and any failed assertions will be reported as test failures.
 ///
 /// **Example:**
 ///
@@ -37,7 +37,7 @@ import XCTest
 ///         )
 ///
 ///         // Perform the network request and fetch the user data.
-///         let user = try await networkManager.fetchData(forEndpoint: singleUserEndpoint)
+///         let user = try await networkManager.fetchData(for: singleUserEndpoint)
 ///
 ///         // Assert the received user data's first name and last name.
 ///         XCTAssert(user.data.firstName == "Janet", "First name for this user should be Janet")
@@ -47,7 +47,7 @@ import XCTest
 /// }
 /// ```
 ///
-/// - Note: This test case class inherits the testing environment and `AsyncNetworkManager` instance from the `AsyncNetworkManagerTestCase` class. It is marked as `final`, meaning it cannot be subclassed further. However, you can create new test case classes based on this class and extend its functionality as needed.
+/// - Note: This test case class inherits the testing environment and `NetworkManager` instance from the `AsyncNetworkManagerTestCase` class. It is marked as `final`, meaning it cannot be subclassed further. However, you can create new test case classes based on this class and extend its functionality as needed.
 final class GetHTTPMethodTests: AsyncNetworkManagerTestCase {
     
     /// Test method for fetching a single user.
@@ -113,9 +113,9 @@ final class GetHTTPMethodTests: AsyncNetworkManagerTestCase {
     /// This test method simulates a network request to fetch a list of users from the server using the `GET` HTTP method.
     /// It sets up a specific endpoint for fetching the user list by providing the required `UserList` model type, a valid path for retrieving the users (e.g., `/api/users?page=2`), the `.get` HTTP method, and an empty header dictionary.
     ///
-    /// The method then uses the `AsyncNetworkManager` to perform the network request asynchronously. The server should respond with a list of users, which includes information about the total number of users and the total number of pages. The test method verifies that the response contains the expected number of users (6 users in this case) and that the total number of pages matches the expected value (2 pages in this case).
+    /// The method then uses the `NetworkManager` to perform the network request asynchronously. The server should respond with a list of users, which includes information about the total number of users and the total number of pages. The test method verifies that the response contains the expected number of users (6 users in this case) and that the total number of pages matches the expected value (2 pages in this case).
     ///
-    /// - Important: This test method is automatically executed by the testing framework when running the tests. It verifies that the `AsyncNetworkManager` correctly handles the scenario of fetching a list of users using the `GET` HTTP method.
+    /// - Important: This test method is automatically executed by the testing framework when running the tests. It verifies that the `NetworkManager` correctly handles the scenario of fetching a list of users using the `GET` HTTP method.
     
     
     /// Test method for fetching a list of users from the server.
@@ -233,7 +233,7 @@ final class GetHTTPMethodTests: AsyncNetworkManagerTestCase {
     ///
     /// - Throws: An error if there's an issue with the network request or decoding the response.
     ///
-    /// - Important: This test method is automatically executed by the testing framework when running the tests. It verifies that the `AsyncNetworkManager` correctly handles the scenario of fetching a non-existent resource using the `GET` HTTP method.
+    /// - Important: This test method is automatically executed by the testing framework when running the tests. It verifies that the `NetworkManager` correctly handles the scenario of fetching a non-existent resource using the `GET` HTTP method.
     ///
     /// - Note: The test method uses the `Resource` struct with nested `Data` and `Support` structs to represent the resource data returned by the server.
     private func testSingleResourceNotFound() async throws {
@@ -265,7 +265,7 @@ final class GetHTTPMethodTests: AsyncNetworkManagerTestCase {
     ///
     /// - Throws: An error if there's an issue with the network request or decoding the response.
     ///
-    /// - Important: This test method is automatically executed by the testing framework when running the tests. It verifies that the `AsyncNetworkManager` correctly handles the scenario of fetching a list of resources using the `GET` HTTP method.
+    /// - Important: This test method is automatically executed by the testing framework when running the tests. It verifies that the `NetworkManager` correctly handles the scenario of fetching a list of resources using the `GET` HTTP method.
     ///
     /// - Note: The test method uses the `ResourceList` struct with nested `Data` and `Support` structs to represent the list of resources returned by the server.
     private func testResourceListFound() async throws {

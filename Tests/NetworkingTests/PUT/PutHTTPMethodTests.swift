@@ -1,25 +1,25 @@
 //
 //  PostHTTPMethodTests.swift
-//  AsyncNetworking
+//  Networking
 //
-//  Created by Juan Diego Ocampo on 2023-07-22.
+//  Created by Juan Diego Ocampo on 11.28.2024.
 //
 
 import Foundation
 import XCTest
 @testable import AsyncNetworking
 
-/// A test case class for testing the `PUT` HTTP method using the `AsyncNetworkManager`.
+/// A test case class for testing the `PUT` HTTP method using the `NetworkManager`.
 ///
-/// This test case class is a subclass of `AsyncNetworkManagerTestCase`, which provides the testing environment and instance of the `AsyncNetworkManager` with the `.testing` environment configuration. The `PostHTTPMethodTests` class focuses on testing the `PUT` HTTP method for specific endpoints using the `AsyncNetworkManager`.
+/// This test case class is a subclass of `AsyncNetworkManagerTestCase`, which provides the testing environment and instance of the `NetworkManager` with the `.testing` environment configuration. The `PostHTTPMethodTests` class focuses on testing the `PUT` HTTP method for specific endpoints using the `NetworkManager`.
 ///
 /// **Testing the PUT HTTP Method:**
 ///
-/// The `put` HTTP method is used to update data on the server by modifying some resources. In this test case class, we define test methods to ensure that the `AsyncNetworkManager` correctly handles `PUT` requests, performs the network communication, and decodes the server response into the expected model objects.
+/// The `put` HTTP method is used to update data on the server by modifying some resources. In this test case class, we define test methods to ensure that the `NetworkManager` correctly handles `PUT` requests, performs the network communication, and decodes the server response into the expected model objects.
 ///
 /// **Usage:**
 ///
-/// To use this test case class, run the individual test methods or all test methods collectively to verify the correctness of the `PUT` HTTP method implementation in the `AsyncNetworkManager`. The test methods are automatically executed by the testing framework, and any failed assertions will be reported as test failures.
+/// To use this test case class, run the individual test methods or all test methods collectively to verify the correctness of the `PUT` HTTP method implementation in the `NetworkManager`. The test methods are automatically executed by the testing framework, and any failed assertions will be reported as test failures.
 ///
 /// **Example:**
 ///
@@ -40,7 +40,7 @@ import XCTest
 ///         )
 ///
 ///         // Perform the network request and fetch the user data.
-///         let user = try await try await networkManager.sendData(forEndpoint: endpoint)
+///         let user = try await try await networkManager.sendData(for: endpoint)
 ///
 ///         // Assert the received user data's name and job.
 ///         XCTAssert(user.name == "morpheus", "The name for this user should be morpheus.")
@@ -50,7 +50,7 @@ import XCTest
 /// }
 /// ```
 ///
-/// - Note: This test case class inherits the testing environment and `AsyncNetworkManager` instance from the `AsyncNetworkManagerTestCase` class. It is marked as `final`, meaning it cannot be subclassed further. However, you can create new test case classes based on this class and extend its functionality as needed.
+/// - Note: This test case class inherits the testing environment and `NetworkManager` instance from the `AsyncNetworkManagerTestCase` class. It is marked as `final`, meaning it cannot be subclassed further. However, you can create new test case classes based on this class and extend its functionality as needed.
 final class PutHTTPMethodTests: AsyncNetworkManagerTestCase {
     
     /// Test method for handling the successful scenario of updating a user's profile.
