@@ -49,12 +49,6 @@ public struct Endpoint<T: Decodable>: Sendable {
     
     // MARK: - Properties
     
-    /// The `JSONEncoder` instance used for encoding request data.
-    ///
-    /// Use this to specify the type of data to be sent in the request.
-    ///
-    public let encoder: JSONEncoder
-    
     /// The `JSONDecoder` instance used for decoding response data.
     ///
     /// Use this to specify the type of data to be decoded from the response.
@@ -95,7 +89,7 @@ public struct Endpoint<T: Decodable>: Sendable {
     ///
     /// This should conform to `Encodable` for proper encoding.
     ///
-    public let httpData: (any Encodable)?
+    public let httpData: Data?
     
     /// The timeout interval for the request, in seconds.
     ///
@@ -109,67 +103,7 @@ public struct Endpoint<T: Decodable>: Sendable {
     ///
     public var keyPath: String? = nil
     
-    // MARK: - Encoding and Decoding Strategies
-    
-    /// The key encoding strategy for the `JSONEncoder`.
-    ///
-    /// The default value is `.useDefaultKeys`.
-    ///
-    private var _keyEncodingStrategy: JSONEncoder.KeyEncodingStrategy = .useDefaultKeys
-    
-    /// The key encoding strategy for the `JSONEncoder`.
-    ///
-    /// The default value is `.useDefaultKeys`.
-    ///
-    public var keyEncodingStrategy: JSONEncoder.KeyEncodingStrategy {
-        get {
-            _keyEncodingStrategy
-        }
-        set {
-            _keyEncodingStrategy = newValue
-            encoder.keyEncodingStrategy = _keyEncodingStrategy
-        }
-    }
-    
-    /// The date encoding strategy for the `JSONEncoder`.
-    ///
-    /// The default value is `.deferredToDate`.
-    ///
-    private var _dateEncodingStrategy: JSONEncoder.DateEncodingStrategy = .deferredToDate
-    
-    /// The date encoding strategy for the `JSONEncoder`.
-    ///
-    /// The default value is `.deferredToDate`.
-    ///
-    public var dateEncodingStrategy: JSONEncoder.DateEncodingStrategy {
-        get {
-            _dateEncodingStrategy
-        }
-        set {
-            _dateEncodingStrategy = newValue
-            encoder.dateEncodingStrategy = _dateEncodingStrategy
-        }
-    }
-    
-    /// The data encoding strategy for the `JSONEncoder`.
-    ///
-    /// The default value is `.base64`.
-    ///
-    private var _dataEncodingStrategy: JSONEncoder.DataEncodingStrategy = .base64
-    
-    /// The data encoding strategy for the `JSONEncoder`.
-    ///
-    /// The default value is `.base64`.
-    ///
-    public var dataEncodingStrategy: JSONEncoder.DataEncodingStrategy {
-        get {
-            _dataEncodingStrategy
-        }
-        set {
-            _dataEncodingStrategy = newValue
-            encoder.dataEncodingStrategy = _dataEncodingStrategy
-        }
-    }
+    // MARK: - Decoding Strategies
     
     /// The key decoding strategy for the `JSONDecoder`.
     ///
@@ -267,11 +201,7 @@ public struct Endpoint<T: Decodable>: Sendable {
         self.headerFields = headers
         self.queryItems = queryItems
         self.httpData = nil
-        self.encoder = JSONEncoder()
         self.decoder = JSONDecoder()
-        self.encoder.keyEncodingStrategy = _keyEncodingStrategy
-        self.encoder.dateEncodingStrategy = _dateEncodingStrategy
-        self.encoder.dataEncodingStrategy = _dataEncodingStrategy
         self.decoder.keyDecodingStrategy = _keyDecodingStrategy
         self.decoder.dateDecodingStrategy = _dateDecodingStrategy
         self.decoder.dataDecodingStrategy = _dataDecodingStrategy
@@ -297,7 +227,7 @@ public struct Endpoint<T: Decodable>: Sendable {
         httpMethod: HTTPMethod,
         headers: [String: String],
         queryItems: [String: String]? = nil,
-        httpData: Encodable
+        httpData: Data
     ) {
         self.decodeType = decodeType
         self.path = path
@@ -305,11 +235,10 @@ public struct Endpoint<T: Decodable>: Sendable {
         self.headerFields = headers
         self.queryItems = queryItems
         self.httpData = httpData
-        self.encoder = JSONEncoder()
         self.decoder = JSONDecoder()
-        self.encoder.keyEncodingStrategy = _keyEncodingStrategy
-        self.encoder.dateEncodingStrategy = _dateEncodingStrategy
-        self.encoder.dataEncodingStrategy = _dataEncodingStrategy
+        self.decoder.keyDecodingStrategy = _keyDecodingStrategy
+        self.decoder.dateDecodingStrategy = _dateDecodingStrategy
+        self.decoder.dataDecodingStrategy = _dataDecodingStrategy
     }
     
 }
@@ -430,6 +359,10 @@ extension Endpoint {
         request.timeoutInterval = endpoint.timeoutInterval
         request.allowsCellularAccess = true
         request.allowsExpensiveNetworkAccess = true
+        // If the request has body data, add it to the `URLRequest` object.
+        if let data = endpoint.httpData {
+            request.httpBody = data
+        }
         // Return the configured `URLRequest` object.
         return request
     }

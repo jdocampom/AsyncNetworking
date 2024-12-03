@@ -59,24 +59,9 @@ extension NetworkManager {
             let url = try Endpoint.url(for: endpoint, using: environment)
             // Create `URLRequest` object.
             let request = Endpoint.request(forEndpoint: endpoint, url: url)
-            // Create an empty `Data` object to hold the HTTP request body.
-            var httpBody = Data()
-            // Create a`JSONEncoder` object to encode the HTTP body data into a generic
-            // object of the specified type `T` using the encoding properties of the provided `endpoint`.
-            if let httpData = endpoint.httpData {
-                // Try to encode the `httpData` using the manager's `encoder` property.
-                do {
-                    // Set the `httpBody` to the encoded `httpData`.
-                    httpBody = try endpoint.encoder.encode(httpData)
-                } catch let decodingError {
-                    // If an error occurs during encoding, throw an `encodingError`.
-                    throw NetworkingError.encodingError(decodingError)
-                }
-            }
             // Try to execute the `URLRequest` using the provided `URLSession` for the chosen environment.
-            let (data, response) = try await environment.session.upload(
+            let (data, response) = try await environment.session.data(
                 for: request,
-                from: httpBody,
                 delegate: delegate
             )
             // Try to parse the `response` object into a  `HTTPURLResponse` structure.
